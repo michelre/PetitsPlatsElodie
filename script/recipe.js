@@ -1,11 +1,12 @@
 // Fonction pour afficher les recettes sur la page
-function displayRecipes(recipes) {
+function displayRecipes(recipes) {    
     const descriptions = [];
     const ingredients = [];
     const imgUrl = 'assets/imgRecipes/';
 
     //cration des chiches pour les recettes
     const recipesContainer = document.querySelector('.recipes');
+    recipesContainer.innerHTML = ''
     recipes.forEach(recipe => {
         //creation de l'element l'article
         const recipeCard = document.createElement('article');
@@ -16,7 +17,7 @@ function displayRecipes(recipes) {
         //ajout de l'image
         const image = document.createElement('img');
         image.className = 'image';
-        image.src = imgUrl + recipe.image;
+        //image.src = imgUrl + recipe.image;
         image.alt = recipe.name;
         //ajout du temps de preparation
         const time = document.createElement('p');

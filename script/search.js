@@ -1,5 +1,5 @@
 // Fonction pour afficher les données de recherche
-function displaySearch(recipes) {
+function displaySearch(recipes, onSelectedIngredient, onSelectedUstensil, onSelectedApplicance) {
     const btnIngredients = document.querySelector("#ingredient");
     const btnUstensils = document.querySelector("#ustensils");
     const btnAppliance = document.querySelector("#appliance");
@@ -33,6 +33,10 @@ function displaySearch(recipes) {
         const ingredientNameP = document.createElement('p');
         ingredientNameP.textContent = ingredient;
         ingredientsList.appendChild(ingredientNameP);
+
+        ingredientNameP.addEventListener('click', () => {
+            onSelectedIngredient(ingredient)
+        })
     });
 
     const ustensilsList = document.createElement('div');
@@ -40,6 +44,10 @@ function displaySearch(recipes) {
         const ustensilLi = document.createElement('p');
         ustensilLi.textContent = ustensil;
         ustensilsList.appendChild(ustensilLi);
+
+        ustensilLi.addEventListener('click', () => {
+            onSelectedUstensil(ustensil)
+        })
     });
 
     const appliancesList = document.createElement('div');
@@ -47,6 +55,10 @@ function displaySearch(recipes) {
         const applianceP = document.createElement('p');
         applianceP.textContent = appliance;
         appliancesList.appendChild(applianceP);
+
+        applianceP.addEventListener('click', () => {
+            onSelectedApplicance(appliance)
+        })
     });
 
     // Ajout des listes aux boutons 
