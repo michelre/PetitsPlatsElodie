@@ -49,7 +49,7 @@ function displaySearch(recipes) {
         appliancesList.appendChild(applianceP);
     });
 
-    // Ajout des listes aux boutons (cachées par défaut)
+    // Ajout des listes aux boutons 
     btnIngredients.appendChild(ingredientsList);
     btnUstensils.appendChild(ustensilsList);
     btnAppliance.appendChild(appliancesList);
