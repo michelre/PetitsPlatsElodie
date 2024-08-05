@@ -63,24 +63,52 @@ body {
 .categories {
     display: flex;
     justify-content: center;
-    margin: 20px;
+    padding: 50px;
+    background: #EDEDED;
 }
 
 .category-button {
+    background-color: #f9f9f9;
     padding: 10px 20px;
     font-size: 1em;
     margin: 0 10px;
     border: none;
-    border-radius: 5px;
-    background-color: #e0e0e0;
     cursor: pointer;
 }
+#ingredient div, #ustensils div, #appliance div {
+    display: none;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 10px;
+    max-height:315px;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:active, button:focus {
+    outline: none;
+}
+
+
+button {
+    cursor: pointer;
+}
+
+button:active, button:focus {
+    outline: none;
+}
+
 
 .recipes {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     padding: 20px;
     gap: 20px;
+    background: #EDEDED;
 }
 
 .recipe-card {
