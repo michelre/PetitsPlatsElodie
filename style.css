@@ -1,182 +1,252 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .header {
-    background-image: url(/assets/img/bg.svg);
-    background-position: center;
-    padding: 69px 0 0 70px;
-    background-size: cover;
+  background-image: url(/assets/img/bg.svg);
+  background-position: center;
+  padding: 69px 0 0 70px;
+  background-size: cover;
 }
 
 .header img {
-    width: 180.349px;
-    height: 25.261px;
- 
+  width: 180.349px;
+  height: 25.261px;
 }
 
 .header h1 {
-    color: #ffd15b;
-    text-align: center;
-    max-width: 700px;
-    margin: 170px auto 30px auto;
-    line-height: 50px;
+  color: #ffd15b;
+  text-align: center;
+  max-width: 700px;
+  margin: 170px auto 30px auto;
+  line-height: 50px;
 }
 
 .search-container {
-    margin: auto;
-    display: flex;
-    /* flex-direction: column; */
-    align-items: center;
-    max-width: 950px;
-    padding-bottom: 189px;
-    border: none;
+  margin: auto;
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  max-width: 950px;
+  padding-bottom: 189px;
+  border: none;
 }
 
 .search-bar {
-    border-radius: 5px;
-    width: 100%;
-    padding: 26px 60px 26px 35px;
+  border-radius: 5px;
+  width: 100%;
+  padding: 26px 60px 26px 35px;
 }
 
 .search-button {
- 
-    border-radius: 10px;
-    background-color: #000;
-    border: none;
-    position: relative;
-    left: -60px;
-    width: 50px;
-    height: 50px;
+  border-radius: 10px;
+  background-color: #000;
+  border: none;
+  position: relative;
+  left: -60px;
+  width: 50px;
+  height: 50px;
 }
 
-.search-button img{
-    position: relative;
-    width: 27px;
-    height: 28px;
+.search-button img {
+  position: relative;
+  width: 27px;
+  height: 28px;
 }
-
 
 .categories {
-    display: flex;
-    justify-content: center;
-    padding: 50px;
-    background: #EDEDED;
+  display: flex;
+  justify-content: center;
+  padding: 50px;
+  background: #ededed;
 }
 
 .category-button {
-    background-color: #f9f9f9;
-    padding: 10px 20px;
-    font-size: 1em;
-    margin: 0 10px;
-    border: none;
-    cursor: pointer;
+  background-color: #f9f9f9;
+  padding: 10px 20px;
+  font-size: 14px;
+  margin: 0 10px;
+  border: none;
+  cursor: pointer;
+  display: grid;
+  gap: 10px;
 }
-#ingredient div, #ustensils div, #appliance div {
-    display: none;
-    background-color: #f9f9f9;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-top: 10px;
-    max-height:315px;
+
+#ingredient div,
+#ustensils div,
+#appliance div {
+  display: none;
+  background-color: #f9f9f9;
+  padding: 0;
+  margin: 0px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-top: 10px;
+  overflow: hidden;
+  max-height: calc(14px* 13);
+  font-size: 16px;
+}
+
+
+#ingredient div,
+#ustensils div,
+#appliance div, p{
+    padding: 5px;
+    margin: 0px;
+    font-size: 14px;
+}
+button {
+  cursor: pointer;
+}
+
+button:active,
+button:focus {
+  outline: none;
 }
 
 button {
-    cursor: pointer;
+  cursor: pointer;
 }
 
-button:active, button:focus {
-    outline: none;
+button:active,
+button:focus {
+  outline: none;
 }
-
-
-button {
-    cursor: pointer;
-}
-
-button:active, button:focus {
-    outline: none;
-}
-
 
 .recipes {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    padding: 20px;
-    gap: 20px;
-    background: #EDEDED;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 20px;
+  gap: 20px;
+  background: #ededed;
 }
 
 .recipe-card {
-    position: relative;
-    background: white;
-    width: 380px;
-    height: 731px;
-    overflow: hidden;
-    border-radius: 21px;
-    box-shadow: 0px 4px 34px 30px rgba(0, 0, 0, 0.04);
+  position: relative;
+  background: white;
+  width: 380px;
+  height: 731px;
+  overflow: hidden;
+  border-radius: 21px;
+  box-shadow: 0px 4px 34px 30px rgba(0, 0, 0, 0.04);
 }
 .image-container {
-    position: relative;
+  position: relative;
 }
 .recipe-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    width: 100%;
-    border-radius: 5px;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  width: 100%;
+  border-radius: 5px;
 }
-.recipe-time{
-    position: absolute;
-    top: 10px;
-    right: 10px; 
-    padding: 5px 10px;   
-    color: var(--Black, #1B1B1B);
-    text-align: center;
-    font-family: Manrope;
-    font-size: 12px;
-    border-radius: 14px;
-    background: var(--Yellow, #FFD15B);
+.recipe-time {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 10px;
+  color: var(--Black, #1b1b1b);
+  text-align: center;
+  font-family: Manrope;
+  font-size: 12px;
+  border-radius: 14px;
+  background: var(--Yellow, #ffd15b);
 }
-.recipe-div{
-    padding: 40px 25px;
+.recipe-div {
+  padding: 40px 25px;
 }
 .recipe-description {
-    display: -webkit-box;
-    box-orient: vertical;
-    line-clamp: 4;
-
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-height: calc(1.2em * 5); 
-    margin-top: 10px;
+  overflow: hidden;
+  max-height: calc(14px * 6);
+  margin-top: 10px;
+  color: var(--Black, #1b1b1b);
+  font-size: 14px;
 }
 
 .recipe-card h2 {
-    color: #000;
-    font-family: Anton;
-    font-size: 18px;
-    font-style: bold;
-    font-weight: 400;
-    line-height: normal;
+  color: #000;
+  font-family: Anton;
+  font-size: 18px;
+  font-style: bold;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .recipe-card h3 {
-    margin: 15px 0;
+  margin: 15px 0;
 }
 
 .recipe-card ul {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+.recipe-ingredient .ingredients-list {
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+     grid-template-rows: 1fr 1fr;
+    row-gap: 5px;
+    column-gap: 20px;
+}
 
+.div-ingredient li {
+  background: white;
+  padding: 1px;
+  color: var(--Black, #1b1b1b);
+  font-family: Manrope;
+  font-size: 14px;
+  margin: 0;
+  width: 100%;
+}
+
+.div-ingredient .ingredient-name{
+    color: var(--Black, #1B1B1B);
+    font-family: Manrope;
+    font-size: 14px;
+}
+.div-ingredient .ingredient-detail{
+    color: var(--Grey, #7A7A7A);
+}
+.ingredients-list .div-ingredient{
+    margin: 10px 0;
 }
 
 .recipe-card li {
-    margin: 10px 0;
+  margin: 5px 0;
+display: flex;
+justify-content: start;
+}
+main{
+    background: #ededed; 
+}
+main ul li {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 18px;
+    align-items: center;
+    gap: 2px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background: #ffd15b;
+    width: 110px;
+    height: auto;
+    font-size: 14px;
+}
+main ul li #text{
+    padding: 5px;
+}
+main .selected-container{
+    background: #ededed;
+}
+main .selected-container li {
+display: flex;
+}
+.ingredients-list .div-ingredient{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
 }

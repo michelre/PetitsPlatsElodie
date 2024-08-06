@@ -41,11 +41,11 @@ function displaySearch(recipes, onSelectedIngredient, onSelectedUstensil, onSele
 
     const ustensilsList = document.createElement('div');
     ustensils.forEach((ustensil) => {
-        const ustensilLi = document.createElement('p');
-        ustensilLi.textContent = ustensil;
-        ustensilsList.appendChild(ustensilLi);
+        const ustensilP = document.createElement('p');
+        ustensilP.textContent = ustensil;
+        ustensilsList.appendChild(ustensilP);
 
-        ustensilLi.addEventListener('click', () => {
+        ustensilP.addEventListener('click', () => {
             onSelectedUstensil(ustensil)
         })
     });
