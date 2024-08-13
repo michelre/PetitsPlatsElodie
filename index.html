@@ -38,18 +38,43 @@
     <main>
       <div class="categories">
         <button id="ingredient" class="category-button">
-          <span>Ingrédients <i class="fa-solid fa-chevron-down"></i></span
-          ><input type="text" class="search-ingredient" />
+          <span>Ingrédients <i class="fa-solid fa-chevron-down"></i></span>
+          <div class="mini-input">
+            <input type="text" class="search-btn" id="ingredient-search-input"/>
+            <i class="fa-light fa-x" style="color:#7A7A7A;"></i>
+            <i class="fa-solid fa-magnifying-glass" style="color:#7A7A7A;"></i>
+          </div> 
         </button>
-        <button id="appliance" class="category-button">
-          <span>Appareils <i class="fa-solid fa-chevron-down"></i></span
-          ><input type="text" class="search-ingredient" />
+        
+        <div id="ingredient-list" class="list-group ">
+        </div>
+      
+      <button id="ustensils" class="category-button">
+          <span>Ustensils <i class="fa-solid fa-chevron-down"></i></span>
+          <div class="mini-input">
+            <input type="text" class="search-btn" id="ustensil-search-input" />
+          <i class="fa-light fa-x" style="color:#7A7A7A;"></i>
+          <i class="fa-solid fa-magnifying-glass" style="color:#7A7A7A;"></i>
+          </div>
         </button>
-        <button id="ustensils" class="category-button">
-          <span>Ustensiles <i class="fa-solid fa-chevron-down"></i></span
-          ><input type="text" class="search-ingredient" />
-        </button>
+        <div id="img-ustensils">
+
+        </div>
+      <div id="ustensil-list" class="list-group ">
       </div>
+      
+      <button id="appliance" class="category-button">
+          <span>Appareils <i class="fa-solid fa-chevron-down"></i></span>
+          <div class="mini-input">
+            <input type="text" class="search-btn" id="appliance-search-input" />
+            <i class="fa-light fa-x" style="color:#7A7A7A;"></i>
+            <i class="fa-solid fa-magnifying-glass" style="color:#7A7A7A;"></i>
+          </div>
+        </button>
+        
+      <div id="appliance-list" class="list-group "></div>
+      </div>
+
       <ul class="selected-container"></ul>
       <section class="recipes"></section>
     </main>
