@@ -158,14 +158,17 @@ const filterBySearch = (recipe) => {
 
 //fonction de filtre des recettes
 const filterRecipes = () => {
-  const filteredRecipes = recipes.filter((recipe) => {
-    return (
-      filterByIngredient(recipe) &&
+
+  let filteredRecipes = []
+  for(let i = 0; i < recipes.length; i++){
+    let recipe = recipes[i] 
+    if(filterByIngredient(recipe) &&
       filterByUstensil(recipe) &&
       filterByAppliance(recipe) &&
-      filterBySearch(recipe)
-    );
-  });
+      filterBySearch(recipe)) {
+        filteredRecipes.push(recipe)
+    }
+  }
   displayRecipes(filteredRecipes);
 };
 
