@@ -1,5 +1,4 @@
-// Fonction pour afficher les données de recherche
-function displaySearch(recipes, onSelectedIngredient, onSelectedUstensil, onSelectedApplicance) {
+function displaySearch(recipes, onSelectedIngredient, onSelectedUstensil, onSelectedAppliance) {
     const btnIngredients = document.querySelector("#ingredient");
     const btnUstensils = document.querySelector("#ustensils");
     const btnAppliance = document.querySelector("#appliance");
@@ -8,7 +7,7 @@ function displaySearch(recipes, onSelectedIngredient, onSelectedUstensil, onSele
     const ingredients = [];
     const appliances = [];
 
-    //afficher qu'une seul fois les éléments
+    // Afficher qu'une seule fois les éléments 
     recipes.forEach((recipe) => {
         recipe.ustensils.forEach((ustensil) => {
             if (!ustensils.includes(ustensil)) {
@@ -26,9 +25,10 @@ function displaySearch(recipes, onSelectedIngredient, onSelectedUstensil, onSele
             appliances.push(recipe.appliance);
         }
     });
-
+   
     // Créer les listes
     const ingredientsList = document.createElement('div');
+    ingredientsList.className = 'list-group';
     ingredients.forEach((ingredient) => {
         const ingredientNameP = document.createElement('p');
         ingredientNameP.textContent = ingredient;
@@ -38,62 +38,129 @@ function displaySearch(recipes, onSelectedIngredient, onSelectedUstensil, onSele
             onSelectedIngredient(ingredient)
         })
     });
+    
 
+    // Crée la div de la liste d'ustensils 
     const ustensilsList = document.createElement('div');
+    ustensilsList.className = 'list-group';
+    ustensilsList.id = 'ustensil-list';
+    // Boucle sur les ustensils et ajoute chaque ustensil dans un p
     ustensils.forEach((ustensil) => {
         const ustensilP = document.createElement('p');
         ustensilP.textContent = ustensil;
         ustensilsList.appendChild(ustensilP);
-
+        // Ajouter un event listener sur chaque ustensil 
         ustensilP.addEventListener('click', () => {
-            onSelectedUstensil(ustensil)
-        })
+            onSelectedUstensil(ustensil);
+        });
     });
 
+    // Crée la div de la liste des appareils
     const appliancesList = document.createElement('div');
+    appliancesList.className = 'list-group';
+    appliancesList.id = 'appliance-list';
+    // Boucle sur les appareils et ajoute chaque appareil dans un p
     appliances.forEach((appliance) => {
         const applianceP = document.createElement('p');
         applianceP.textContent = appliance;
         appliancesList.appendChild(applianceP);
-
+        // Ajouter un event listener sur chaque appareil
         applianceP.addEventListener('click', () => {
-            onSelectedApplicance(appliance)
-        })
+            onSelectedAppliance(appliance);
+        });
     });
 
-    // Ajout des listes aux boutons 
+    // Ajout des listes aux boutons
     btnIngredients.appendChild(ingredientsList);
     btnUstensils.appendChild(ustensilsList);
     btnAppliance.appendChild(appliancesList);
 
+
     // Ajouter des écouteurs d'événements pour les boutons
     btnIngredients.addEventListener('click', () => {
-        toggleDisplay(ingredientsList);
+        toggleDisplay(btnIngredients, ingredientsList);
     });
 
     btnUstensils.addEventListener('click', () => {
-        toggleDisplay(ustensilsList);
+        toggleDisplay(btnUstensils, ustensilsList);
     });
 
     btnAppliance.addEventListener('click', () => {
-        toggleDisplay(appliancesList);
+        toggleDisplay(btnAppliance, appliancesList);
     });
+
+    // Ajouter un écouteur d'événements global pour détecter les clics à l'extérieur
+    document.addEventListener('click', handleClickOutside);
 }
 
-// Fonction pour basculer l'affichage des listes
-function toggleDisplay(element) {
-    const allLists = document.querySelectorAll('#ingredient div, #ustensils div, #appliance div');
+function toggleDisplay(button, element) {
+    const allButtons = document.querySelectorAll('.category-button');
+    const allLists = document.querySelectorAll('.list-group');
+
+    // Cache tous les autres inputs
+    allButtons.forEach(btn => {
+        const input = btn.querySelector('input');
+        if (input) input.style.display = 'none';
+    });
+
+    // Cache toutes les autres listes
     allLists.forEach(list => {
         if (list !== element) {
             list.style.display = 'none';
         }
     });
 
-    if (element.style.display === 'block') {
+    // Récupère l'input de recherche associé au bouton cliqué
+    const input = button.querySelector('input');
+
+    // Modifie la visibilité de l'input et de la liste
+    if (input.style.display === 'block') {
+        input.style.display = 'none';
         element.style.display = 'none';
     } else {
+        input.style.display = 'block';
         element.style.display = 'block';
     }
+}
+
+// Fonction pour cacher la liste et l'input au clic en dehors du bouton
+function handleClickOutside(event) {
+    const buttons = document.querySelectorAll('.category-button');
+    let clickedInside = false;
+
+    buttons.forEach(button => {
+        if (button.contains(event.target)) {
+            clickedInside = true;
+        }
+    });
+
+    // Si le clic n'était pas à l'intérieur d'un des boutons, cacher toutes les listes
+    if (!clickedInside) {
+        hideAllLists();
+    }
+}
+
+// Fonction qui vide l'input, cache la liste, et réinitialise la liste complète lors du prochain affichage
+function hideAllLists() {
+    const allButtons = document.querySelectorAll('.category-button');
+    const allLists = document.querySelectorAll('.list-group');
+
+    allButtons.forEach(button => {
+        const input = button.querySelector('input');
+        if (input) {
+            input.style.display = 'none';
+            input.value = ''; // Vide l'input
+        }
+    });
+
+    allLists.forEach(list => {
+        list.style.display = 'none';
+        // Réaffiche toute la liste de recherche
+        const items = list.querySelectorAll('p');
+        items.forEach(item => {
+            item.style.display = 'block';
+        });
+    });
 }
 
 
