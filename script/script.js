@@ -3,6 +3,7 @@ let selectedUstensils = [];
 let selectedApplicances = [];
 let recipes = [];
 
+// Fonction pour récupérer les recettes depuis un fichier JSON
 async function getRecipes() {
   const response = await fetch("data/recipes.json");
   recipes = await response.json();
@@ -15,29 +16,33 @@ async function getRecipes() {
   );
 }
 
+// Ajouter un élément sélectionné dans le conteneur des éléments sélectionnés
 const addElementToSelectedContainer = (element, onDelete) => {
   const selectedContainer = document.querySelector(".selected-container");
   const elementLi = document.createElement("li");
   elementLi.innerHTML = element;
-  //ajouter une icon au li 
+  // Ajouter une icône de suppression au li
   const deleteIcon = document.createElement("i");
   deleteIcon.className = "fa-solid fa-xmark";
   elementLi.appendChild(deleteIcon);
-  //ajouter une fonction au click de l'icone
+
+  // Ajouter une fonction au clic de l'icône de suppression
   deleteIcon.addEventListener("click", () => {
     onDelete();
     elementLi.remove();
   });
 
+  //ajouter le li dans le container
   selectedContainer.appendChild(elementLi);
-
+  //ajouter une fonction au clic du li
   elementLi.addEventListener("click", () => {
     onDelete();
     elementLi.remove();
-    filterRecipes();
+    filterRecipes();// Refiltrer les recettes après suppression
   });
 };
 
+//ajouter l'element selectionné dans le container
 const onSelectedIngredient = (ingredient) => {
   selectedIngredients.push(ingredient);
   addElementToSelectedContainer(ingredient, () => {
@@ -57,27 +62,59 @@ const onSelectedUstensil = (ustensil) => {
 };
 
 const onSelectedApplicance = (appliance) => {
-  selectedApplicances.push(appliance);
+  selectedApplicances.push(appliance)
   addElementToSelectedContainer(appliance, () => {
-    selectedApplicances = selectedApplicances.filter(
-      (app) => app !== appliance
-    );
+      selectedApplicances = selectedApplicances.filter(app => app !== appliance)
+  })
+  filterRecipes()
+}
+
+const filterBySearchInput = (type) => {
+  let searchInput;
+
+  // Obtenir la valeur de l'input selon le type
+  if (type === 'ingredient') {
+      searchInput = document.getElementById('ingredient-search-input').value.toLowerCase();
+  } else if (type === 'ustensil') {
+      searchInput = document.getElementById('ustensil-search-input').value.toLowerCase();
+  } else if (type === 'appliance') {
+      searchInput = document.getElementById('appliance-search-input').value.toLowerCase();
+  }
+
+  // Si moins de 3 caractères, afficher toutes les options
+  if (!searchInput || searchInput.length < 3) {
+      document.querySelectorAll(`.list-group p`).forEach(item => {
+          item.style.display = 'block';
+      });
+      return;
+  }
+
+  // Filtrer les éléments de la liste
+  const listGroup = document.querySelectorAll(`.list-group p`);
+  listGroup.forEach(item => {
+      if (item.textContent.toLowerCase().includes(searchInput)) {
+          item.style.display = 'block';
+      } else {
+          item.style.display = 'none';
+      }
   });
-  filterRecipes();
 };
-// filtre les ingredients par ingredients
+
+
+// filtre les recettes par ingredients
 const filterByIngredient = (recipe) => {
-  return selectedIngredients.every((ingredient) =>
-    recipe.ingredients.some(({ ingredient: ing }) => ing === ingredient)
-  );
-};
-// filtre les ingredients par ustensils
+  return recipe
+      .ingredients
+      .filter(({ingredient}) => selectedIngredients.includes(ingredient)).length === selectedIngredients.length
+}
+// filtre les recettes par ustensils
 const filterByUstensil = (recipe) => {
   return selectedUstensils.every((ustensil) =>
     recipe.ustensils.includes(ustensil)
   );
 };
-// filtre les ingredients par appareil
+
+// filtre les recettes par appareil
 const filterByAppliance = (recipe) => {
   return (
     selectedApplicances.length === 0 ||
@@ -85,6 +122,8 @@ const filterByAppliance = (recipe) => {
   );
 };
 
+
+//filtrer les ingredient depuis la barre de recherche principal
 const filterBySearch = (recipe) => {
   const searchInput = document.querySelector(".search-bar").value.toLowerCase();
   // Si moins de 3 caractères, ne pas filtrer par recherche textuelle
@@ -102,6 +141,7 @@ const filterBySearch = (recipe) => {
   return titleMatches || ingredientsMatch || descriptionMatches;
 };
 
+//fonction de filtre des recettes
 const filterRecipes = () => {
   const filteredRecipes = recipes.filter((recipe) => {
     return (
@@ -113,11 +153,18 @@ const filterRecipes = () => {
   });
   displayRecipes(filteredRecipes);
 };
-
+// Ajouter les événements sur les inputs 
+document.getElementById('ingredient-search-input').addEventListener('input', () => filterBySearchInput('ingredient'));
+document.getElementById('ustensil-search-input').addEventListener('input', () => filterBySearchInput('ustensil'));
+document.getElementById('appliance-search-input').addEventListener('input', () => filterBySearchInput('appliance'));
+//ecouteur d'evenement sur la barre de recherche princilpale
 document.querySelector(".search-bar").addEventListener("input", filterRecipes);
 
 const init = async () => {
   await getRecipes();
 };
+
+init();
+
 
 init();
