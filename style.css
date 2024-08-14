@@ -77,6 +77,7 @@ body {
   cursor: pointer;
   display: grid;
   gap: 10px;
+  width: 187px;
 }
 button:active,
 button:focus {
@@ -100,14 +101,7 @@ button:focus {
  top: 57px;
 }
 
-.category-button input { 
-  display: none;
-  width: 100%;
-  padding: 5px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  margin-bottom: 5px;
-}
+
 /* 
 #ingredient div,
 #ustensils div,
@@ -115,7 +109,6 @@ button:focus {
 
   font-size: 14px;
 } */
-
 
 .recipes {
   position: relative;
@@ -269,31 +262,58 @@ main .selected-container li {
   margin-right: 15px;
 }
 
+.category-button {
+  position: relative;
+  z-index: 2;
+  background-color: #f9f9f9;
+  padding: 10px 39px;
+  font-size: 14px;
+  margin: 0 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  display: grid;
+  gap: 10px;
+}
+.category-button span{
+  padding-top: 5px;
+}
+
 .mini-input{
   position: absolute;
   z-index: 9;
-  top: 28px;
-  padding: 10px;
+  top: 34px;
+  padding: 3px 0;
   border-radius: 5px;
   background: #f9f9f9;
+  width: 187px;
   
 }
+
 .mini-input input {
-  width: 100%;
-  padding: 5px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  margin-bottom: 5px;
+    display: none;
+    width: 95%;
+    height: 30px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+    font-size: 14px;
 }
-.fa-light {
-  position : absolute;
+
+.mini-input .fa-xmark {
+  display: none;
+ position: absolute;
   z-index: 8;
-  top: 15px;
-  left: 114px;
+  top: 14px;
+  left: 143px;
+  font-size: large;
 }
-.fa-magnifying-glass{
+.mini-input .fa-magnifying-glass{
+  display: none;
   position: absolute;
   z-index: 8;
-  top: 17px;
-  left: 126px;
+  top: 15px;
+  left: 160px;
+  font-size: large;
 }

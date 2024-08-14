@@ -153,6 +153,7 @@ const filterRecipes = () => {
   });
   displayRecipes(filteredRecipes);
 };
+
 // Ajouter les événements sur les inputs 
 document.getElementById('ingredient-search-input').addEventListener('input', () => filterBySearchInput('ingredient'));
 document.getElementById('ustensil-search-input').addEventListener('input', () => filterBySearchInput('ustensil'));
@@ -163,8 +164,5 @@ document.querySelector(".search-bar").addEventListener("input", filterRecipes);
 const init = async () => {
   await getRecipes();
 };
-
-init();
-
 
 init();

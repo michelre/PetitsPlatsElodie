@@ -26,14 +26,15 @@ function displaySearch(recipes, onSelectedIngredient, onSelectedUstensil, onSele
         }
     });
    
-    // Créer les listes
+    // Créer les listes des ingredients
     const ingredientsList = document.createElement('div');
     ingredientsList.className = 'list-group';
-    ingredients.forEach((ingredient) => {
+    ingredientsList.id = 'ingredient-list';
+    ingredients.forEach((ingredient) => { // Boucle sur les ingredients et ajoute chaque ustensil dans un p
         const ingredientNameP = document.createElement('p');
         ingredientNameP.textContent = ingredient;
         ingredientsList.appendChild(ingredientNameP);
-
+    // Ajouter un event listener sur chaque ingredient
         ingredientNameP.addEventListener('click', () => {
             onSelectedIngredient(ingredient)
         })
@@ -44,8 +45,7 @@ function displaySearch(recipes, onSelectedIngredient, onSelectedUstensil, onSele
     const ustensilsList = document.createElement('div');
     ustensilsList.className = 'list-group';
     ustensilsList.id = 'ustensil-list';
-    // Boucle sur les ustensils et ajoute chaque ustensil dans un p
-    ustensils.forEach((ustensil) => {
+    ustensils.forEach((ustensil) => { // Boucle sur les ustensils et ajoute chaque ustensil dans un p
         const ustensilP = document.createElement('p');
         ustensilP.textContent = ustensil;
         ustensilsList.appendChild(ustensilP);
@@ -90,12 +90,14 @@ function displaySearch(recipes, onSelectedIngredient, onSelectedUstensil, onSele
     });
 
     // Ajouter un écouteur d'événements global pour détecter les clics à l'extérieur
+    document.addEventListener('click', handleIconClick);
     document.addEventListener('click', handleClickOutside);
 }
-
-function toggleDisplay(button, element) {
+//
+function toggleDisplay(button, element, icon) {
     const allButtons = document.querySelectorAll('.category-button');
     const allLists = document.querySelectorAll('.list-group');
+    
 
     // Cache tous les autres inputs
     allButtons.forEach(btn => {
@@ -110,6 +112,7 @@ function toggleDisplay(button, element) {
         }
     });
 
+    
     // Récupère l'input de recherche associé au bouton cliqué
     const input = button.querySelector('input');
 
@@ -122,6 +125,22 @@ function toggleDisplay(button, element) {
         element.style.display = 'block';
     }
 }
+
+function handleIconClick(event) {
+    const buttonsearchIcons = document.querySelectorAll('.fa-chevron-down'); 
+    let clickIcon = false;
+
+    buttonsearchIcons.forEach(icon => {
+        if (icon === event.target) { 
+            clickIcon = true;
+        }
+    });
+
+    if (clickIcon) {
+        hideAllLists(); // Cacher toutes les listes si l'icône est cliquée
+    }
+}
+
 
 // Fonction pour cacher la liste et l'input au clic en dehors du bouton
 function handleClickOutside(event) {
