@@ -7,24 +7,28 @@ function displaySearch(recipes, onSelectedIngredient, onSelectedUstensil, onSele
     const ingredients = [];
     const appliances = [];
 
-    // Afficher qu'une seule fois les éléments 
-    recipes.forEach((recipe) => {
-        recipe.ustensils.forEach((ustensil) => {
-            if (!ustensils.includes(ustensil)) {
-                ustensils.push(ustensil);
-            }
-        });
-
-        recipe.ingredients.forEach((ingredientItem) => {
-            if (!ingredients.includes(ingredientItem.ingredient)) {
-                ingredients.push(ingredientItem.ingredient);
-            }
-        });
-
-        if (!appliances.includes(recipe.appliance)) {
-            appliances.push(recipe.appliance);
+    // Afficher qu'une seule fois les éléments
+recipes.forEach((recipe) => {
+    recipe.ustensils.forEach((ustensil) => {
+        const lowerUstensil = ustensil.toLowerCase(); // Convertir en minuscules
+        if (!ustensils.includes(lowerUstensil)) {
+            ustensils.push(lowerUstensil);
         }
     });
+
+    recipe.ingredients.forEach((ingredientItem) => {
+        const lowerIngredient = ingredientItem.ingredient.toLowerCase(); // Convertir en minuscules
+        if (!ingredients.includes(lowerIngredient)) {
+            ingredients.push(lowerIngredient);
+        }
+    });
+
+    const lowerAppliance = recipe.appliance.toLowerCase(); // Convertir en minuscules
+    if (!appliances.includes(lowerAppliance)) {
+        appliances.push(lowerAppliance);
+    }
+});
+
    
     // Créer les listes des ingredients
     const ingredientsList = document.createElement('div');
@@ -94,7 +98,7 @@ function displaySearch(recipes, onSelectedIngredient, onSelectedUstensil, onSele
     document.addEventListener('click', handleClickOutside);
 }
 //
-function toggleDisplay(button, element, icon) {
+function toggleDisplay(button, element) {
     const allButtons = document.querySelectorAll('.category-button');
     const allLists = document.querySelectorAll('.list-group');
     
@@ -126,6 +130,55 @@ function toggleDisplay(button, element, icon) {
     }
 }
 
+function inconsDisplay(input) {
+    const iconX = document.querySelector('.fa-xmark');
+    const iconMagnifyingGlass = input.parentNode.querySelector('.fa-magnifying-glass');
+    const allLists = document.querySelectorAll('.list-group'); // Sélectionne toutes les listes
+
+    // Afficher l'icône de la loupe lors du focus sur l'input
+    input.addEventListener('focus', () => {
+        if (iconMagnifyingGlass) {
+            iconMagnifyingGlass.style.display = 'block';
+        }
+    });
+
+    // Masquer l'icône de la loupe lorsque l'input perd le focus
+    input.addEventListener('blur', () => {
+        if (iconMagnifyingGlass) {
+            iconMagnifyingGlass.style.display = 'none'; 
+        }
+    });
+
+    // Afficher l'icône X lorsque l'utilisateur tape dans l'input
+    input.addEventListener('input', () => {
+        if (input.value.length >= 3) {
+            if (iconX) {
+                iconX.style.display = 'block'; 
+            }
+        } else {
+            if (iconX) {
+                iconX.style.display = 'none'; // Cache l'icône X si l'input est vide
+            }
+        }
+
+    });
+    //reinitialiser les listes si l'input est vidé
+    iconX.addEventListener('click', () => {
+        if (input.value.length >= 1) {
+            input.value = '';
+            iconX.style.display = 'none';
+            allLists.forEach(list => {
+                list.style.display = 'block';
+            });
+        }
+    });
+}
+// Appliquer inconsDisplay à tous les inputs ciblées
+document.querySelectorAll('.search-btn').forEach(input => {
+    inconsDisplay(input);
+});
+
+
 function handleIconClick(event) {
     const buttonsearchIcons = document.querySelectorAll('.fa-chevron-down'); 
     let clickIcon = false;
@@ -140,6 +193,7 @@ function handleIconClick(event) {
         hideAllLists(); // Cacher toutes les listes si l'icône est cliquée
     }
 }
+
 
 
 // Fonction pour cacher la liste et l'input au clic en dehors du bouton
@@ -181,5 +235,6 @@ function hideAllLists() {
         });
     });
 }
+
 
 

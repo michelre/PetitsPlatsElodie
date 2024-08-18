@@ -94,6 +94,7 @@ const filterBySearchInput = (type) => {
   listGroup.forEach(item => {
       if (item.textContent.toLowerCase().includes(searchInput)) {
           item.style.display = 'block';
+          item.className = 'p-selected-input';
       } else {
           item.style.display = 'none';
       }

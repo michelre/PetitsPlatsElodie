@@ -11,30 +11,35 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css" />
     <title>Les Petits Plats</title>
   </head>
   <body>
     <header class="header">
-      <img src="assets/img/Logo.svg" alt="logo les petits plats" />
-      <div class="container">
-        <h1>
-          CHERCHEZ PARMI PLUS DE 1500 RECETTES DU QUOTIDIEN, SIMPLES ET
-          DÉLICIEUSES
-        </h1>
+      <div class="container-fluid">
+        <div class="logo-container d-flex align-right">
+          <img src="assets/img/Logo.svg" alt="logo les petits plats" class="img-fluid">
+        </div>
+        <div class="text-center mx-auto">
+          <h1 class="display-4">
+            CHERCHEZ PARMI PLUS DE 1500 RECETTES DU QUOTIDIEN, SIMPLES ET DÉLICIEUSES
+          </h1>
+        </div>
       </div>
-
-      <div class="search-container">
+      <div class="search-container mx-auto mt-5 d-flex justify-content-center">
         <input
           type="text"
           placeholder="Recherchez une recette, un ingrédient..."
-          class="search-bar"
+          class="search-bar form-control"
         />
-        <button class="search-button">
+        <button class="search-button btn">
           <img src="assets/img/blackLoupe.png" alt="bouton rechercher" />
         </button>
       </div>
     </header>
+    
+    
     <main class="main-container">
       <div class="categories">
         <button id="ingredient" class="category-button">
@@ -48,7 +53,7 @@
             <i class="fa-solid fa-xmark" style="color: #7a7a7a" ></i>
             <i class="fa-solid fa-magnifying-glass" style="color: #7a7a7a"></i>
           </div>
-          <div class="btn-container-list"></div>
+          <div class="container-list-btn"></div>
         </button>
 
         <button id="ustensils" class="category-button">
@@ -58,7 +63,7 @@
             <i class="fa-solid fa-xmark" style="color: #7a7a7a" ></i>
             <i class="fa-solid fa-magnifying-glass" style="color: #7a7a7a"></i>
           </div>
-          <div class="btn-container-list"></div>
+          <div class="container-list-btn"></div>
         </button>
 
         <button id="appliance" class="category-button">
@@ -68,12 +73,21 @@
             <i class="fa-solid fa-xmark" style="color: #7a7a7a" ></i>
             <i class="fa-solid fa-magnifying-glass" style="color: #7a7a7a"></i>
           </div>
-          <div class="btn-container-list"></div>
+          <div class="container-list-btn"></div>
         </button>
       </div>
 
-      <ul class="selected-container"></ul>
-      <section class="recipes"></section>
+      <ul class="selected-container">
+        <!-- ul selected container will be dynamically generated here-->
+      </ul>
+
+      <div class="container-fluid">
+        <section class="recipes">
+            <!-- Recipe cards will be dynamically generated here -->
+        </section>
+      </div>
+      
+      
     </main>
     <script src="script/script.js"></script>
     <script src="script/recipe.js"></script>
