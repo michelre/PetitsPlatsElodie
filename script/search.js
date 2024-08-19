@@ -1,4 +1,4 @@
-function displaySearch(recipes, onSelectedIngredient, onSelectedUstensil, onSelectedAppliance) {
+function displaySearch(recipes, onSelectedIngredient, onSelectedUstensil, onSelectedAppliance, onDeleteIngredient) {
     const btnIngredients = document.querySelector("#ingredient");
     const btnUstensils = document.querySelector("#ustensils");
     const btnAppliance = document.querySelector("#appliance");
@@ -29,6 +29,19 @@ recipes.forEach((recipe) => {
     }
 });
 
+const handleSelectedList = (element, containerId) => {
+    const selectedContainer = document.querySelector(`#${containerId} .container-list-btn`)
+    const newElement = document.createElement('p')
+    newElement.innerText = element.innerText
+    element.style.display = 'none'
+    selectedContainer.appendChild(newElement)            
+    newElement.addEventListener('click', () => {
+        newElement.remove()
+        onDeleteIngredient(element.innerText)
+        element.style.display = 'block'
+    })
+}
+
    
     // Créer les listes des ingredients
     const ingredientsList = document.createElement('div');
@@ -39,8 +52,9 @@ recipes.forEach((recipe) => {
         ingredientNameP.textContent = ingredient;
         ingredientsList.appendChild(ingredientNameP);
     // Ajouter un event listener sur chaque ingredient
-        ingredientNameP.addEventListener('click', () => {
+        ingredientNameP.addEventListener('click', (e) => {
             onSelectedIngredient(ingredient)
+            handleSelectedList(e.target, 'ingredient')
         })
     });
     
@@ -54,8 +68,9 @@ recipes.forEach((recipe) => {
         ustensilP.textContent = ustensil;
         ustensilsList.appendChild(ustensilP);
         // Ajouter un event listener sur chaque ustensil 
-        ustensilP.addEventListener('click', () => {
+        ustensilP.addEventListener('click', (e) => {
             onSelectedUstensil(ustensil);
+            handleSelectedList(e.target, 'ustensils')
         });
     });
 
@@ -69,8 +84,9 @@ recipes.forEach((recipe) => {
         applianceP.textContent = appliance;
         appliancesList.appendChild(applianceP);
         // Ajouter un event listener sur chaque appareil
-        applianceP.addEventListener('click', () => {
+        applianceP.addEventListener('click', (e) => {
             onSelectedAppliance(appliance);
+            handleSelectedList(e.target, 'appliance')
         });
     });
 
@@ -130,55 +146,6 @@ function toggleDisplay(button, element) {
     }
 }
 
-function inconsDisplay(input) {
-    const iconX = document.querySelector('.fa-xmark');
-    const iconMagnifyingGlass = input.parentNode.querySelector('.fa-magnifying-glass');
-    const allLists = document.querySelectorAll('.list-group'); // Sélectionne toutes les listes
-
-    // Afficher l'icône de la loupe lors du focus sur l'input
-    input.addEventListener('focus', () => {
-        if (iconMagnifyingGlass) {
-            iconMagnifyingGlass.style.display = 'block';
-        }
-    });
-
-    // Masquer l'icône de la loupe lorsque l'input perd le focus
-    input.addEventListener('blur', () => {
-        if (iconMagnifyingGlass) {
-            iconMagnifyingGlass.style.display = 'none'; 
-        }
-    });
-
-    // Afficher l'icône X lorsque l'utilisateur tape dans l'input
-    input.addEventListener('input', () => {
-        if (input.value.length >= 3) {
-            if (iconX) {
-                iconX.style.display = 'block'; 
-            }
-        } else {
-            if (iconX) {
-                iconX.style.display = 'none'; // Cache l'icône X si l'input est vide
-            }
-        }
-
-    });
-    //reinitialiser les listes si l'input est vidé
-    iconX.addEventListener('click', () => {
-        if (input.value.length >= 1) {
-            input.value = '';
-            iconX.style.display = 'none';
-            allLists.forEach(list => {
-                list.style.display = 'block';
-            });
-        }
-    });
-}
-// Appliquer inconsDisplay à tous les inputs ciblées
-document.querySelectorAll('.search-btn').forEach(input => {
-    inconsDisplay(input);
-});
-
-
 function handleIconClick(event) {
     const buttonsearchIcons = document.querySelectorAll('.fa-chevron-down'); 
     let clickIcon = false;
@@ -234,6 +201,21 @@ function hideAllLists() {
             item.style.display = 'block';
         });
     });
+}
+
+const removeSelectedItem = (containerId, element) => {
+    const selectedItems = document.querySelectorAll(`#${containerId} .container-list-btn p`)
+    const listGroup = document.querySelectorAll(`#${containerId} .list-group p`)
+    selectedItems.forEach(e => {
+        if(e.innerText === element){
+            e.remove()
+        }
+    })
+    listGroup.forEach(e => {
+        if(e.innerText === element){
+            e.style.display = 'block'
+        }
+    })
 }
 
 

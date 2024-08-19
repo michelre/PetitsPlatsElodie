@@ -12,7 +12,8 @@ async function getRecipes() {
     recipes,
     onSelectedIngredient,
     onSelectedUstensil,
-    onSelectedApplicance
+    onSelectedApplicance,
+    onDeleteIngredient,
   );
 }
 
@@ -29,7 +30,7 @@ const addElementToSelectedContainer = (element, onDelete) => {
   // Ajouter une fonction au clic de l'icône de suppression
   deleteIcon.addEventListener("click", () => {
     onDelete();
-    elementLi.remove();
+    elementLi.remove();    
   });
 
   //ajouter le li dans le container
@@ -42,13 +43,26 @@ const addElementToSelectedContainer = (element, onDelete) => {
   });
 };
 
+const onDeleteIngredient = (ingredient) => {
+  selectedIngredients = selectedIngredients.filter(i => i !== ingredient)
+  filterRecipes();
+  const selectedElementsList = document.querySelectorAll('.selected-container li')
+  selectedElementsList.forEach(e => {
+    if(e.innerText === ingredient){
+      e.remove()
+    }
+  })
+}
+
 //ajouter l'element selectionné dans le container
-const onSelectedIngredient = (ingredient) => {
+const onSelectedIngredient = (ingredient) => {  
   selectedIngredients.push(ingredient);
   addElementToSelectedContainer(ingredient, () => {
     selectedIngredients = selectedIngredients.filter(
       (ing) => ing !== ingredient
     );
+
+    removeSelectedItem('ingredient', ingredient)
   });
   filterRecipes();
 };
@@ -94,7 +108,7 @@ const filterBySearchInput = (type) => {
   listGroup.forEach(item => {
       if (item.textContent.toLowerCase().includes(searchInput)) {
           item.style.display = 'block';
-          item.className = 'p-selected-input';
+          //item.className = 'p-selected-input';
       } else {
           item.style.display = 'none';
       }

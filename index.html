@@ -41,12 +41,15 @@
     
     
     <main class="main-container">
+      <div class="container">
+
+      
       <div class="categories">
         <button id="ingredient" class="category-button">
           <span>Ingrédients <i class="fa-solid fa-chevron-down"></i></span>
           <div class="mini-input">
             <input
-              type="text"
+              type="search"
               class="search-btn"
               id="ingredient-search-input"
             />
@@ -59,7 +62,7 @@
         <button id="ustensils" class="category-button">
           <span>Ustensils <i class="fa-solid fa-chevron-down"></i></span>
           <div class="mini-input">
-            <input type="text" class="search-btn" id="ustensil-search-input" />
+            <input type="search" class="search-btn" id="ustensil-search-input" />
             <i class="fa-solid fa-xmark" style="color: #7a7a7a" ></i>
             <i class="fa-solid fa-magnifying-glass" style="color: #7a7a7a"></i>
           </div>
@@ -69,7 +72,7 @@
         <button id="appliance" class="category-button">
           <span>Appareils <i class="fa-solid fa-chevron-down"></i></span>
           <div class="mini-input">
-            <input type="text" class="search-btn" id="appliance-search-input" />
+            <input type="search" class="search-btn" id="appliance-search-input" />
             <i class="fa-solid fa-xmark" style="color: #7a7a7a" ></i>
             <i class="fa-solid fa-magnifying-glass" style="color: #7a7a7a"></i>
           </div>
@@ -81,7 +84,9 @@
         <!-- ul selected container will be dynamically generated here-->
       </ul>
 
-      <div class="container-fluid">
+      </div>
+
+      <div class="container">
         <section class="recipes">
             <!-- Recipe cards will be dynamically generated here -->
         </section>
