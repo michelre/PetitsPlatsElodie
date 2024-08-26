@@ -1,6 +1,6 @@
 let selectedIngredients = [];
 let selectedUstensils = [];
-let selectedApplicances = [];
+let selectedAppliances = [];
 let recipes = [];
 
 // Fonction pour récupérer les recettes depuis un fichier JSON
@@ -12,7 +12,7 @@ async function getRecipes() {
     recipes,
     onSelectedIngredient,
     onSelectedUstensil,
-    onSelectedApplicance,
+    onSelectedAppliance,
     onDeleteItem)}
 
 // Ajouter un élément sélectionné dans le conteneur des éléments sélectionnés
@@ -56,10 +56,11 @@ const onSelectedUstensil = (ustensil) => {
   filterRecipes();
 };
 
-const onSelectedApplicance = (appliance) => {
-  selectedApplicances.push(appliance)
+const onSelectedAppliance = (appliance) => {
+  selectedAppliances.push(appliance)
   addElementToSelectedContainer(appliance, () => {
-      selectedApplicances = selectedApplicances.filter(app => app !== appliance)
+      selectedAppliances = selectedAppliances.filter
+      (app => app !== appliance)
       removeSelectedItem('appliance', appliance)
   })
   filterRecipes()
@@ -141,8 +142,8 @@ const filterByUstensil = (recipe) => {
 //filtre les rectte par appareil
 const filterByAppliance = (recipe) => {
   const recipeAppliance = recipe.appliance.toLowerCase();
-  return selectedApplicances.length === 0 || 
-         selectedApplicances.some(selectedAppliance => 
+  return selectedAppliances.length === 0 || 
+         selectedAppliances.some(selectedAppliance => 
            selectedAppliance.toLowerCase() === recipeAppliance
          );
 };
