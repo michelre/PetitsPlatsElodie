@@ -13,9 +13,7 @@ async function getRecipes() {
     onSelectedIngredient,
     onSelectedUstensil,
     onSelectedApplicance,
-    onDeleteIngredient,
-  );
-}
+    onDeleteItem)}
 
 // Ajouter un élément sélectionné dans le conteneur des éléments sélectionnés
 const addElementToSelectedContainer = (element, onDelete) => {
@@ -26,13 +24,6 @@ const addElementToSelectedContainer = (element, onDelete) => {
   const deleteIcon = document.createElement("i");
   deleteIcon.className = "fa-solid fa-xmark";
   elementLi.appendChild(deleteIcon);
-
-  // Ajouter une fonction au clic de l'icône de suppression
-  deleteIcon.addEventListener("click", () => {
-    onDelete();
-    elementLi.remove();    
-  });
-
   //ajouter le li dans le container
   selectedContainer.appendChild(elementLi);
   //ajouter une fonction au clic du li
@@ -43,25 +34,13 @@ const addElementToSelectedContainer = (element, onDelete) => {
   });
 };
 
-const onDeleteIngredient = (ingredient) => {
-  selectedIngredients = selectedIngredients.filter(i => i !== ingredient)
-  filterRecipes();
-  const selectedElementsList = document.querySelectorAll('.selected-container li')
-  selectedElementsList.forEach(e => {
-    if(e.innerText === ingredient){
-      e.remove()
-    }
-  })
-}
-
-//ajouter l'element selectionné dans le container
+//ajouter l'element selectionné dans le container de l'input
 const onSelectedIngredient = (ingredient) => {  
   selectedIngredients.push(ingredient);
   addElementToSelectedContainer(ingredient, () => {
     selectedIngredients = selectedIngredients.filter(
       (ing) => ing !== ingredient
     );
-
     removeSelectedItem('ingredient', ingredient)
   });
   filterRecipes();
@@ -70,7 +49,9 @@ const onSelectedIngredient = (ingredient) => {
 const onSelectedUstensil = (ustensil) => {
   selectedUstensils.push(ustensil);
   addElementToSelectedContainer(ustensil, () => {
-    selectedUstensils = selectedUstensils.filter((ust) => ust !== ustensil);
+    selectedUstensils = selectedUstensils.filter
+    ((ust) => ust !== ustensil);
+    removeSelectedItem('ustensil', ustensil)
   });
   filterRecipes();
 };
@@ -79,10 +60,38 @@ const onSelectedApplicance = (appliance) => {
   selectedApplicances.push(appliance)
   addElementToSelectedContainer(appliance, () => {
       selectedApplicances = selectedApplicances.filter(app => app !== appliance)
+      removeSelectedItem('appliance', appliance)
   })
   filterRecipes()
 }
 
+
+
+
+const onDeleteItem = (type, item) => {
+  if (type === 'ingredient') {
+    selectedIngredients = selectedIngredients.filter(i => i !== item);
+  } else if (type === 'ustensil') {
+    selectedUstensils = selectedUstensils.filter(u => u !== item);
+  } else if (type === 'appliance') {
+    selectedAppliances = selectedAppliances.filter(a => a !== item);
+  }
+
+  filterRecipes();
+
+  const selectedElementsList = document.querySelectorAll('.selected-container li');
+  selectedElementsList.forEach(e => {
+    if (e.innerText === item) {
+      e.remove();
+    }
+  });
+};
+
+
+
+
+
+//filtrage  des recttes depuis l'input de chaque boutons
 const filterBySearchInput = (type) => {
   let searchInput;
 
@@ -115,28 +124,28 @@ const filterBySearchInput = (type) => {
   });
 };
 
-
-// filtre les recettes par ingredients
+//filtre les rectte par ingredient
 const filterByIngredient = (recipe) => {
-  return recipe
-      .ingredients
-      .filter(({ingredient}) => selectedIngredients.includes(ingredient)).length === selectedIngredients.length
-}
-// filtre les recettes par ustensils
+  const recipeIngredients = recipe.ingredients.map(({ ingredient }) => ingredient.toLowerCase());
+  return selectedIngredients.every(selectedIngredient => 
+    recipeIngredients.includes(selectedIngredient.toLowerCase())
+  );
+};
+//filtre les recette par ustensil
 const filterByUstensil = (recipe) => {
-  return selectedUstensils.every((ustensil) =>
-    recipe.ustensils.includes(ustensil)
+  const recipeUstensils = recipe.ustensils.map(ustensil => ustensil.toLowerCase());
+  return selectedUstensils.every(selectedUstensil => 
+    recipeUstensils.includes(selectedUstensil.toLowerCase())
   );
 };
-
-// filtre les recettes par appareil
+//filtre les rectte par appareil
 const filterByAppliance = (recipe) => {
-  return (
-    selectedApplicances.length === 0 ||
-    selectedApplicances.includes(recipe.appliance)
-  );
+  const recipeAppliance = recipe.appliance.toLowerCase();
+  return selectedApplicances.length === 0 || 
+         selectedApplicances.some(selectedAppliance => 
+           selectedAppliance.toLowerCase() === recipeAppliance
+         );
 };
-
 
 //filtrer les ingredient depuis la barre de recherche principal
 const filterBySearch = (recipe) => {
@@ -156,18 +165,33 @@ const filterBySearch = (recipe) => {
   return titleMatches || ingredientsMatch || descriptionMatches;
 };
 
-//fonction de filtre des recettes
+
+
+const updateRecipeCount = (count) => {
+  console.log('Mise à jour du compteur avec :', count);
+  const recipeCountElement = document.getElementById('recipe-count');
+  if (recipeCountElement) {
+      recipeCountElement.innerText = ` ${count} Recettes`;
+  }
+};
+
+
 const filterRecipes = () => {
   const filteredRecipes = recipes.filter((recipe) => {
-    return (
-      filterByIngredient(recipe) &&
-      filterByUstensil(recipe) &&
-      filterByAppliance(recipe) &&
-      filterBySearch(recipe)
-    );
+      return (
+          filterByIngredient(recipe) &&
+          filterByUstensil(recipe) &&
+          filterByAppliance(recipe) &&
+          filterBySearch(recipe)
+      );
   });
+  // Mise à jour du compteur
+  updateRecipeCount(filteredRecipes.length);
+
+  // Affichage des recettes filtrées
   displayRecipes(filteredRecipes);
 };
+
 
 // Ajouter les événements sur les inputs 
 document.getElementById('ingredient-search-input').addEventListener('input', () => filterBySearchInput('ingredient'));
@@ -176,8 +200,10 @@ document.getElementById('appliance-search-input').addEventListener('input', () =
 //ecouteur d'evenement sur la barre de recherche princilpale
 document.querySelector(".search-bar").addEventListener("input", filterRecipes);
 
+
 const init = async () => {
   await getRecipes();
+  filterRecipes();
 };
 
 init();

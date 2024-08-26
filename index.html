@@ -18,8 +18,8 @@
   <body>
     <header class="header">
       <div class="container-fluid">
-        <div class="logo-container d-flex align-right">
-          <img src="assets/img/Logo.svg" alt="logo les petits plats" class="img-fluid">
+        <div class="logo-container d-flex">
+          <img src="assets/img/Logo.svg" alt="logo les petits plats">
         </div>
         <div class="text-center mx-auto">
           <h1 class="display-4">
@@ -29,11 +29,11 @@
       </div>
       <div class="search-container mx-auto mt-5 d-flex justify-content-center">
         <input
-          type="text"
+          type="search"
           placeholder="Recherchez une recette, un ingrédient..."
           class="search-bar form-control"
         />
-        <button class="search-button btn">
+        <button class="search-button btn btn-dark">
           <img src="assets/img/blackLoupe.png" alt="bouton rechercher" />
         </button>
       </div>
@@ -42,8 +42,6 @@
     
     <main class="main-container">
       <div class="container">
-
-      
       <div class="categories">
         <button id="ingredient" class="category-button">
           <span>Ingrédients <i class="fa-solid fa-chevron-down"></i></span>
@@ -56,17 +54,17 @@
             <i class="fa-solid fa-xmark" style="color: #7a7a7a" ></i>
             <i class="fa-solid fa-magnifying-glass" style="color: #7a7a7a"></i>
           </div>
-          <div class="container-list-btn"></div>
+          <div class="container-list-btn" id="ingredient-container"></div>
         </button>
 
-        <button id="ustensils" class="category-button">
+        <button id="ustensil" class="category-button">
           <span>Ustensils <i class="fa-solid fa-chevron-down"></i></span>
           <div class="mini-input">
             <input type="search" class="search-btn" id="ustensil-search-input" />
             <i class="fa-solid fa-xmark" style="color: #7a7a7a" ></i>
             <i class="fa-solid fa-magnifying-glass" style="color: #7a7a7a"></i>
           </div>
-          <div class="container-list-btn"></div>
+          <div class="container-list-btn" id="ustensil-container"></div>
         </button>
 
         <button id="appliance" class="category-button">
@@ -76,8 +74,13 @@
             <i class="fa-solid fa-xmark" style="color: #7a7a7a" ></i>
             <i class="fa-solid fa-magnifying-glass" style="color: #7a7a7a"></i>
           </div>
-          <div class="container-list-btn"></div>
+          <div class="container-list-btn" id="appliance-container"></div>
         </button>
+        <div class="container d-flex flex-end">
+          <div id="recipe-count"></div>
+        </div>
+        
+
       </div>
 
       <ul class="selected-container">

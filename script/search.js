@@ -1,6 +1,6 @@
-function displaySearch(recipes, onSelectedIngredient, onSelectedUstensil, onSelectedAppliance, onDeleteIngredient) {
+function displaySearch(recipes, onSelectedIngredient, onSelectedUstensil, onSelectedAppliance, onDeleteItem) {
     const btnIngredients = document.querySelector("#ingredient");
-    const btnUstensils = document.querySelector("#ustensils");
+    const btnUstensils = document.querySelector("#ustensil");
     const btnAppliance = document.querySelector("#appliance");
 
     const ustensils = [];
@@ -10,37 +10,44 @@ function displaySearch(recipes, onSelectedIngredient, onSelectedUstensil, onSele
     // Afficher qu'une seule fois les éléments
 recipes.forEach((recipe) => {
     recipe.ustensils.forEach((ustensil) => {
-        const lowerUstensil = ustensil.toLowerCase(); // Convertir en minuscules
+        const lowerUstensil = ustensil.toLowerCase();
         if (!ustensils.includes(lowerUstensil)) {
             ustensils.push(lowerUstensil);
         }
     });
 
     recipe.ingredients.forEach((ingredientItem) => {
-        const lowerIngredient = ingredientItem.ingredient.toLowerCase(); // Convertir en minuscules
+        const lowerIngredient = ingredientItem.ingredient.toLowerCase(); 
         if (!ingredients.includes(lowerIngredient)) {
             ingredients.push(lowerIngredient);
         }
     });
 
-    const lowerAppliance = recipe.appliance.toLowerCase(); // Convertir en minuscules
+    const lowerAppliance = recipe.appliance.toLowerCase(); 
     if (!appliances.includes(lowerAppliance)) {
         appliances.push(lowerAppliance);
     }
 });
 
-const handleSelectedList = (element, containerId) => {
-    const selectedContainer = document.querySelector(`#${containerId} .container-list-btn`)
-    const newElement = document.createElement('p')
-    newElement.innerText = element.innerText
-    element.style.display = 'none'
-    selectedContainer.appendChild(newElement)            
+//fonction generique ajout et supp d'elements dans le container input
+const handleSelectedList = (element, containerId, type) => {
+    const selectedContainer = document.querySelector(`#${containerId}`);
+    const newElement = document.createElement('p');
+    // const iconDelete = document.createElement('i');
+    // iconDelete.className = 'fa-solid fa-circle-xmark';
+    newElement.className = 'list-item-container';
+    newElement.innerText = element.innerText;
+    element.style.display = 'none';
+    selectedContainer.appendChild(newElement);
+    // selectedContainer.appendChild(iconDelete);
+
     newElement.addEventListener('click', () => {
-        newElement.remove()
-        onDeleteIngredient(element.innerText)
-        element.style.display = 'block'
-    })
-}
+        newElement.remove();
+        onDeleteItem(type, element.innerText);  // Utilise la fonction générique
+        element.style.display = 'block';
+    });
+};
+
 
    
     // Créer les listes des ingredients
@@ -54,12 +61,13 @@ const handleSelectedList = (element, containerId) => {
     // Ajouter un event listener sur chaque ingredient
         ingredientNameP.addEventListener('click', (e) => {
             onSelectedIngredient(ingredient)
-            handleSelectedList(e.target, 'ingredient')
+            handleSelectedList(e.target, 'ingredient-container', 'ingredient');
+
         })
     });
     
 
-    // Crée la div de la liste d'ustensils 
+    // Crée la liste d'ustensils 
     const ustensilsList = document.createElement('div');
     ustensilsList.className = 'list-group';
     ustensilsList.id = 'ustensil-list';
@@ -70,11 +78,11 @@ const handleSelectedList = (element, containerId) => {
         // Ajouter un event listener sur chaque ustensil 
         ustensilP.addEventListener('click', (e) => {
             onSelectedUstensil(ustensil);
-            handleSelectedList(e.target, 'ustensils')
+            handleSelectedList(e.target,'ustensil-container', 'ustensil')
         });
     });
 
-    // Crée la div de la liste des appareils
+    // Crée la liste des appareils
     const appliancesList = document.createElement('div');
     appliancesList.className = 'list-group';
     appliancesList.id = 'appliance-list';
@@ -86,7 +94,7 @@ const handleSelectedList = (element, containerId) => {
         // Ajouter un event listener sur chaque appareil
         applianceP.addEventListener('click', (e) => {
             onSelectedAppliance(appliance);
-            handleSelectedList(e.target, 'appliance')
+            handleSelectedList(e.target,'appliance-container', 'appliance')
         });
     });
 
@@ -113,6 +121,7 @@ const handleSelectedList = (element, containerId) => {
     document.addEventListener('click', handleIconClick);
     document.addEventListener('click', handleClickOutside);
 }
+
 //
 function toggleDisplay(button, element) {
     const allButtons = document.querySelectorAll('.category-button');

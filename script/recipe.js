@@ -23,7 +23,7 @@ function displayRecipes(recipes) {
         // Ajout de l'image
         const image = document.createElement('img');
         image.className = 'img-fluid';
-        //image.src = imgUrl + recipe.image;
+        image.src = imgUrl + recipe.image;
         image.alt = recipe.name;
         imageContainer.appendChild(image);
 
