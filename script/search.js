@@ -33,13 +33,13 @@ recipes.forEach((recipe) => {
 const handleSelectedList = (element, containerId, type) => {
     const selectedContainer = document.querySelector(`#${containerId}`);
     const newElement = document.createElement('p');
-    // const iconDelete = document.createElement('i');
-    // iconDelete.className = 'fa-solid fa-circle-xmark';
+    //const iconDelete = document.createElement('i');
+    //iconDelete.className = 'fa-solid fa-circle-xmark';
     newElement.className = 'list-item-container';
     newElement.innerText = element.innerText;
     element.style.display = 'none';
     selectedContainer.appendChild(newElement);
-    // selectedContainer.appendChild(iconDelete);
+    //selectedContainer.appendChild(iconDelete);
 
     newElement.addEventListener('click', () => {
         newElement.remove();
@@ -105,16 +105,23 @@ const handleSelectedList = (element, containerId, type) => {
 
 
     // Ajouter des écouteurs d'événements pour les boutons
-    btnIngredients.addEventListener('click', () => {
-        toggleDisplay(btnIngredients, ingredientsList);
+    btnIngredients.addEventListener('click', (e) => {
+        console.log(e.target)
+        if(e.target.tagName === 'SPAN'){
+            toggleDisplay(btnIngredients, ingredientsList);
+        }
     });
 
-    btnUstensils.addEventListener('click', () => {
-        toggleDisplay(btnUstensils, ustensilsList);
+    btnUstensils.addEventListener('click', (e) => {
+        if(e.target.tagName === 'SPAN'){
+            toggleDisplay(btnUstensils, ustensilsList);
+        }
     });
 
-    btnAppliance.addEventListener('click', () => {
-        toggleDisplay(btnAppliance, appliancesList);
+    btnAppliance.addEventListener('click', (e) => {
+        if(e.target.tagName === 'SPAN'){
+            toggleDisplay(btnAppliance, appliancesList);
+        }
     });
 
     // Ajouter un écouteur d'événements global pour détecter les clics à l'extérieur
@@ -126,6 +133,14 @@ const handleSelectedList = (element, containerId, type) => {
 function toggleDisplay(button, element) {
     const allButtons = document.querySelectorAll('.category-button');
     const allLists = document.querySelectorAll('.list-group');
+
+    allButtons.forEach(btn => {
+        if(btn === button){
+            btn.classList.toggle('open')        
+        } else {
+            btn.classList.remove('open')        
+        }
+    })
     
 
     // Cache tous les autres inputs
@@ -176,10 +191,13 @@ function handleIconClick(event) {
 function handleClickOutside(event) {
     const buttons = document.querySelectorAll('.category-button');
     let clickedInside = false;
+    
 
     buttons.forEach(button => {
         if (button.contains(event.target)) {
             clickedInside = true;
+        } else {
+            button.classList.remove('open')
         }
     });
 

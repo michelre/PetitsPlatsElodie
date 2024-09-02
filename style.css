@@ -95,6 +95,7 @@ padding: 5px;
   display: flex;
   padding: 40px 0;
   background: #ededed;
+  width: 70%;
 }
 .categories .d-flex{
   display: flex !important;
@@ -108,10 +109,20 @@ align-self: center;
 }
 
 .list-item-container{
-  margin: 14px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  background-color: #ffd15b;
+  margin-bottom: 10px;
 }
  .fa-circle-xmark{
   margin-right: 10px;
+ }
+
+ .list-item-container::after {
+  font-family: "Font Awesome 6 Free";
+  content: "\f057"
  }
  
 .category-button {
@@ -120,20 +131,40 @@ align-self: center;
   margin: 0 10px;
   border-radius: 10px;
   border: none;
-  display: grid;
-  gap: 10px;
-  width: 33%;
+  width: calc(33% - 10px);
+  height: 35px;
+  overflow: hidden;
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  align-items: center;
 }
-.category-button span{
-  padding-top: 5px;
+
+.category-button.open {
+  height: 300px;
 }
+
+.category-button#ingredient {
+  left: 0
+}
+
+.category-button#ustensil {
+  left: calc(33% + 5px);
+}
+
+.category-button#appliance {
+  left: calc(66% + 10px);
+}
+
 button:active,
 button:focus {
   outline: none;
 }
 .category-button .mini-input{
   width: 100%;
-  
+  position: relative;
 }
 
 .category-button .mini-input .search-btn {
@@ -145,31 +176,23 @@ button:focus {
     box-sizing: border-box;
     margin-bottom: 5px;
     font-size: 14px;
-}
-.category-button .container-list-btn{
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #ffd15b;
-  
+    padding-right: 18px;
 }
 
-.category-button .mini-input .fa-xmark {
-  display: none;
- position: absolute;
-  z-index: 8;
-  top: 14px;
-  left: 143px;
-  font-size: large;
+.search-btn::-webkit-search-cancel-button{
+  color: red;
 }
+
+.category-button .container-list-btn{
+  width: 100%;  
+  margin-top: 10px;
+}
+
 .category-button .mini-input .fa-magnifying-glass{
-  display: none;
   position: absolute;
   z-index: 8;
   top: 15px;
-  left: 160px;
-  font-size: large;
+  right: 8px;
 }
 #ingredient .list-group,
 #ustensil .list-group,
