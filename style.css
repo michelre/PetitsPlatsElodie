@@ -131,7 +131,7 @@ padding: 5px;
   display: flex;
   padding: 40px 0;
   background: #ededed;
-  width: 70%;
+  width: 50%;
 }
 .categories .d-flex{
   display: flex !important;
@@ -181,6 +181,15 @@ margin-bottom: 5px;
 
 .category-button.open {
   height: 300px;
+}
+/* Par défaut, l'icône pointe vers le bas */
+.category-button i.fa-chevron-down {
+  transition: transform 0.3s ease;
+}
+
+/* Lorsque la classe open est active, l'icône est tournée vers le haut */
+.category-button.open i.fa-chevron-down {
+  transform: rotate(180deg);
 }
 
 .category-button#ingredient {
