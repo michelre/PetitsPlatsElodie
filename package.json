@@ -1,0 +1,19 @@
+{
+  "name": "petitsplatselodie",
+  "version": "1.0.0",
+  "description": "P7 JS 2.0 Les petits plats",
+  "main": "index.js",
+  "scripts": {
+    "build": "vite build && cp -r data dist && cp -r assets/imgRecipes dist/assets",
+    "eslint": "eslint script/*.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.9.1",
+    "eslint": "^9.9.1",
+    "globals": "^15.9.0",
+    "vite": "^5.4.2"
+  }
+}

@@ -1,7 +1,6 @@
 // Fonction pour afficher les recettes sur la page
-function displayRecipes(recipes) {    
+export function displayRecipes(recipes) {    
     const descriptions = [];
-    const ingredients = [];
     const imgUrl = 'assets/imgRecipes/';
 
     // Création des fiches pour les recettes
@@ -23,7 +22,7 @@ function displayRecipes(recipes) {
         // Ajout de l'image
         const image = document.createElement('img');
         image.className = 'img-fluid';
-        //image.src = imgUrl + recipe.image;
+        image.src = imgUrl + recipe.image;
         image.alt = recipe.name;
         imageContainer.appendChild(image);
 

@@ -42,43 +42,44 @@
     
     <main class="main-container">
       <div class="container">
-      <div class="categories">
-        <button id="ingredient" class="category-button">
-          <span>Ingrédients <i class="fa-solid fa-chevron-down"></i></span>
-          <div class="mini-input">
-            <input
-              type="search"
-              class="search-btn"
-              id="ingredient-search-input"
-            />
-            <i class="fa-solid fa-magnifying-glass" style="color: #7a7a7a"></i>
+        <div class="filter-container">
+          <div class="categories">
+            <button id="ingredient" class="category-button">
+              <span>Ingrédients <i class="fa-solid fa-chevron-down"></i></span>
+              <div class="mini-input">
+                <input
+                  type="search"
+                  class="search-btn"
+                  id="ingredient-search-input"
+                />
+                <i class="fa-solid fa-magnifying-glass" style="color: #7a7a7a"></i>
+              </div>
+              <div class="container-list-btn" id="ingredient-container"></div>
+            </button>
+    
+            <button id="ustensil" class="category-button">
+              <span>Ustensils <i class="fa-solid fa-chevron-down"></i></span>
+              <div class="mini-input">
+                <input type="search" class="search-btn" id="ustensil-search-input" />
+                <i class="fa-solid fa-magnifying-glass" style="color: #7a7a7a"></i>
+              </div>
+              <div class="container-list-btn" id="ustensil-container"></div>
+            </button>
+    
+            <button id="appliance" class="category-button">
+              <span>Appareils <i class="fa-solid fa-chevron-down"></i></span>
+              <div class="mini-input">
+                <input type="search" class="search-btn" id="appliance-search-input" />
+                <i class="fa-solid fa-magnifying-glass" style="color: #7a7a7a"></i>
+              </div>
+              <div class="container-list-btn" id="appliance-container"></div>
+            </button>    
           </div>
-          <div class="container-list-btn" id="ingredient-container"></div>
-        </button>
-
-        <button id="ustensil" class="category-button">
-          <span>Ustensils <i class="fa-solid fa-chevron-down"></i></span>
-          <div class="mini-input">
-            <input type="search" class="search-btn" id="ustensil-search-input" />
-            <i class="fa-solid fa-magnifying-glass" style="color: #7a7a7a"></i>
+          <div class="d-flex flex-end">
+            <div id="recipe-count"></div>
           </div>
-          <div class="container-list-btn" id="ustensil-container"></div>
-        </button>
-
-        <button id="appliance" class="category-button">
-          <span>Appareils <i class="fa-solid fa-chevron-down"></i></span>
-          <div class="mini-input">
-            <input type="search" class="search-btn" id="appliance-search-input" />
-            <i class="fa-solid fa-magnifying-glass" style="color: #7a7a7a"></i>
-          </div>
-          <div class="container-list-btn" id="appliance-container"></div>
-        </button>
-        <div class="container d-flex flex-end">
-          <div id="recipe-count"></div>
         </div>
-        
-
-      </div>
+      
 
       <ul class="selected-container">
         <!-- ul selected container will be dynamically generated here-->
@@ -94,8 +95,8 @@
       
       
     </main>
-    <script src="script/script.js"></script>
-    <script src="script/recipe.js"></script>
-    <script src="script/search.js"></script>
+    <script src="script/script.js" type="module"></script>
+    <!--<script src="script/recipe.js"></script>
+    <script src="script/search.js"></script>-->
   </body>
 </html>

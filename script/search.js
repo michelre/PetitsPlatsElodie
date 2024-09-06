@@ -1,4 +1,4 @@
-function displaySearch(recipes, onSelectedIngredient, onSelectedUstensil, onSelectedAppliance, onDeleteItem) {
+export function displaySearch(recipes, onSelectedIngredient, onSelectedUstensil, onSelectedAppliance, onDeleteItem) {
     const btnIngredients = document.querySelector("#ingredient");
     const btnUstensils = document.querySelector("#ustensil");
     const btnAppliance = document.querySelector("#appliance");
@@ -230,7 +230,7 @@ function hideAllLists() {
     });
 }
 
-const removeSelectedItem = (containerId, element) => {
+export const removeSelectedItem = (containerId, element) => {
     const selectedItems = document.querySelectorAll(`#${containerId} .container-list-btn p`)
     const listGroup = document.querySelectorAll(`#${containerId} .list-group p`)
     selectedItems.forEach(e => {

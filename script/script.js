@@ -1,3 +1,6 @@
+import {displayRecipes} from './recipe.js'
+import {displaySearch, removeSelectedItem} from './search.js'
+
 let selectedIngredients = [];
 let selectedUstensils = [];
 let selectedAppliances = [];
@@ -49,8 +52,7 @@ const onSelectedIngredient = (ingredient) => {
 const onSelectedUstensil = (ustensil) => {
   selectedUstensils.push(ustensil);
   addElementToSelectedContainer(ustensil, () => {
-    selectedUstensils = selectedUstensils.filter
-    ((ust) => ust !== ustensil);
+    selectedUstensils = selectedUstensils.filter((ust) => ust !== ustensil);
     removeSelectedItem('ustensil', ustensil)
   });
   filterRecipes();
@@ -59,8 +61,7 @@ const onSelectedUstensil = (ustensil) => {
 const onSelectedAppliance = (appliance) => {
   selectedAppliances.push(appliance)
   addElementToSelectedContainer(appliance, () => {
-      selectedAppliances = selectedAppliances.filter
-      (app => app !== appliance)
+      selectedAppliances = selectedAppliances.filter(app => app !== appliance)
       removeSelectedItem('appliance', appliance)
   })
   filterRecipes()
