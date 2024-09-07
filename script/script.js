@@ -11,6 +11,7 @@ async function getRecipes() {
   const response = await fetch("data/recipes.json");
   recipes = await response.json();
   displayRecipes(recipes);
+  
   displaySearch(
     recipes,
     onSelectedIngredient,
