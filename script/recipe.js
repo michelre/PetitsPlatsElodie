@@ -1,11 +1,16 @@
 // Fonction pour afficher les recettes sur la page
-export function displayRecipes(recipes) {    
+export function displayRecipes(recipes) {      
     const descriptions = [];
     const imgUrl = 'assets/imgRecipes/';
 
     // Création des fiches pour les recettes
     const recipesContainer = document.querySelector('.recipes');
     recipesContainer.innerHTML = '';
+
+    if(recipes.length === 0){
+        recipesContainer.innerHTML = 'Aucune recette trouvée!';
+        return 
+    }  
 
 
     recipes.forEach(recipe => {

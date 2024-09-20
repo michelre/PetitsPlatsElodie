@@ -1,5 +1,5 @@
 import {displayRecipes} from './recipe.js'
-import {displaySearch, removeSelectedItem} from './search.js'
+import {displaySearch, removeSelectedItem, hideNoRecipeElements} from './search.js'
 
 let selectedIngredients = [];
 let selectedUstensils = [];
@@ -17,7 +17,8 @@ async function getRecipes() {
     onSelectedIngredient,
     onSelectedUstensil,
     onSelectedAppliance,
-    onDeleteItem)}
+    onDeleteItem)
+}
 
 // Ajouter un élément sélectionné dans le conteneur des éléments sélectionnés
 const addElementToSelectedContainer = (element, onDelete) => {
@@ -193,6 +194,7 @@ const filterRecipes = () => {
 
   // Affichage des recettes filtrées
   displayRecipes(filteredRecipes);
+  hideNoRecipeElements(filteredRecipes)
 };
 
 

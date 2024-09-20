@@ -219,15 +219,6 @@ function hideAllLists() {
             input.value = ''; // Vide l'input
         }
     });
-
-    allLists.forEach(list => {
-        list.style.display = 'none';
-        // Réaffiche toute la liste de recherche
-        const items = list.querySelectorAll('p');
-        items.forEach(item => {
-            item.style.display = 'block';
-        });
-    });
 }
 
 export const removeSelectedItem = (containerId, element) => {
@@ -243,6 +234,30 @@ export const removeSelectedItem = (containerId, element) => {
             e.style.display = 'block'
         }
     })
+}
+
+export const hideNoRecipeElements = (recipes) => {
+
+    const hideElementsInList = (elements, list) => {
+        const listItemContainer = document.querySelectorAll('.list-item-container')
+        const selectedListItems = Array.from(listItemContainer).map(e => e.innerText)
+        elements.forEach(e => {
+            if(!list.includes(e.innerText) || selectedListItems.includes(e.innerText)){
+                e.style.display = 'none'
+            } else {
+                e.style.display = 'block'
+            }
+        })
+    }
+
+    const ingredients = recipes.map(r => r.ingredients.map(i => i.ingredient.toLowerCase())).flat()
+    const appliances = recipes.map(r => r.appliance.toLowerCase())
+    const ustensiles = recipes.map(r => r.ustensils.map(u => u.toLowerCase())).flat()
+
+
+    hideElementsInList(document.querySelectorAll('#ingredient-list p'), ingredients)
+    hideElementsInList(document.querySelectorAll('#appliance-list p'), appliances)
+    hideElementsInList(document.querySelectorAll('#ustensil-list p'), ustensiles)
 }
 
 
