@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Les Petits Plats</title>
+    <script type="module" crossorigin src="/assets/index-DCV6djxO.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CuV4sVhC.css">
+  </head>
+  <body>
+    <header class="header">
+      <div class="container-fluid">
+        <div class="logo-container d-flex">
+          <img src="/assets/Logo-9Vwgnqsu.svg" alt="logo les petits plats">
+        </div>
+        <div class="text-center mx-auto">
+          <h1 class="display-4">
+            CHERCHEZ PARMI PLUS DE 1500 RECETTES DU QUOTIDIEN, SIMPLES ET DÉLICIEUSES
+          </h1>
+        </div>
+      </div>
+      <div class="search-container mx-auto mt-5 d-flex justify-content-center">
+        <input
+          type="search"
+          placeholder="Recherchez une recette, un ingrédient..."
+          class="search-bar form-control"
+        />
+        <button class="search-button btn btn-dark">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAEgSURBVHgB7VbRrcIwDLzXCbrB6wgdoUxAN6Ab0A1gA1iBCWADxASwQWEC2CDY0lVECJGkrvhAnHQSSny+EFtOgRdwzuXCVrgVdu6BI9cajAVJVguvwr0mFhbeXsm1/iANLJAEKyaqImILxi4wBCrkleUJmpyaFVLAa+pSzJ5MVVuniDq/VgNMK9Y9fGD+ux2MYJO1obhMOBWaDQUbYRWMYtFLGNF3bUygw0iIyZXhw1DDsxzsH0awLKdQXMagCexQw0soSA0PwhnsiOt2ToprzPx8kyOuQz1BPcJoa1J0KlwbhvcSQ6DC2LnK+amxa1jgvRxb/i69vYJre9a99vbmzvAAwHvZj94nRn+Q9vnqU25nNPxMf6bfYfqHD4Hj73YHpWa3VBA+fLMAAAAASUVORK5CYII=" alt="bouton rechercher" />
+        </button>
+      </div>
+    </header>
+    
+    
+    <main class="main-container">
+      <div class="container">
+        <div class="filter-container">
+          <div class="categories">
+            <button id="ingredient" class="category-button">
+              <span>Ingrédients <i class="fa-solid fa-chevron-down"></i></span>
+              <div class="mini-input">
+                <input
+                  type="search"
+                  class="search-btn"
+                  id="ingredient-search-input"
+                />
+                <i class="fa-solid fa-magnifying-glass" style="color: #7a7a7a"></i>
+              </div>
+              <div class="container-list-btn" id="ingredient-container"></div>
+            </button>
+    
+            <button id="ustensil" class="category-button">
+              <span>Ustensils <i class="fa-solid fa-chevron-down"></i></span>
+              <div class="mini-input">
+                <input type="search" class="search-btn" id="ustensil-search-input" />
+                <i class="fa-solid fa-magnifying-glass" style="color: #7a7a7a"></i>
+              </div>
+              <div class="container-list-btn" id="ustensil-container"></div>
+            </button>
+    
+            <button id="appliance" class="category-button">
+              <span>Appareils <i class="fa-solid fa-chevron-down"></i></span>
+              <div class="mini-input">
+                <input type="search" class="search-btn" id="appliance-search-input" />
+                <i class="fa-solid fa-magnifying-glass" style="color: #7a7a7a"></i>
+              </div>
+              <div class="container-list-btn" id="appliance-container"></div>
+            </button>    
+          </div>
+          <div class="d-flex flex-end">
+            <div id="recipe-count"></div>
+          </div>
+        </div>
+      
+
+      <ul class="selected-container">
+        <!-- ul selected container will be dynamically generated here-->
+      </ul>
+
+      </div>
+
+      <div class="container">
+        <section class="recipes">
+            <!-- Recipe cards will be dynamically generated here -->
+        </section>
+      </div>
+      
+      
+    </main>
+    <!--<script src="script/recipe.js"></script>
+    <script src="script/search.js"></script>-->
+  </body>
+</html>
